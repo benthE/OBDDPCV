@@ -1,18 +1,24 @@
 package DeJongFormulas;
 
 /**
- * Created by Vincent on 18/04/2014.
+ * Created by Benoit on 18/04/2014.
  */
 public class FitnessCalc {
-    private float idealSolution;
+    private static float idealSolution;
 
-    public void setSolution(float newSolution){
+    public static void setSolution(float newSolution){
         idealSolution = newSolution;
     }
 
-    float getFitness(Individual indivToEval){
+    public float getFitness(Individual indivToEval){
         int fitness = 0;
         //H(x)
         return fitness;
+    }
+
+    public static float getMaxFitness(){
+        int bestFitness = 0;
+        //Comparison
+        return bestFitness;
     }
 }

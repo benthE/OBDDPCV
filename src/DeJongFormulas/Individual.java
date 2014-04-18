@@ -53,8 +53,6 @@ public class Individual extends simpleGA.Individual {
 
     @Override
     public String toString() {
-        return "Individual{" +
-                "value=" + value +
-                '}';
+        return "Value : " + value;
     }
 }
