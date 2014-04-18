@@ -1,58 +1,59 @@
 package DeJongFormulas;
 
-import simpleGA.*;
+import java.util.Random;
 
 /**
  * Created by Benoit on 18/04/2014.
  *
  */
 public class Individual extends simpleGA.Individual {
-    private float value;
-    private float maxVal, minVal;
-    private float fitness;
+    private double values[];
+    private double maxVal, minVal;
+    protected double fitness;
 
     //create a random guy
     public Individual() {
-        value = randRange(minVal,maxVal);
+        int n = 4;
+        values = new double[n];
+        setMaxVal(5.12);
+        setMinVal(-5.12);
+        for(int i=0; i<=(n-1); i++) {
+            Random r = new Random();
+            values[i] = minVal + (maxVal - minVal) * r.nextDouble();
+        }
     }
 
-    private float randRange(float min, float max) {
-        return min + (float)Math.random() * (max - min);
+    public double getValues(int index) {
+        return values[index];
     }
 
-    public float getValue() {
-        return value;
+    public void setValues(double value, int index) {
+        this.values[index] = value;
     }
 
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    public float getMaxVal() {
+    public double getMaxVal() {
         return maxVal;
     }
 
-    public void setMaxVal(float maxVal) {
+    public void setMaxVal(double maxVal) {
         this.maxVal = maxVal;
     }
 
-    public float getMinVal() {
+    public double getMinVal() {
         return minVal;
     }
 
-    public void setMinVal(float minVal) {
+    public void setMinVal(double minVal) {
         this.minVal = minVal;
-    }
-
-    public float getFitness() {
-        if (fitness == 0.0) {
-            fitness = simpleGA.FitnessCalc.getFitness(this);
-        }
-        return fitness;
     }
 
     @Override
     public String toString() {
-        return "Value : " + value;
+        String res = "Value : \n";
+        for(int i=0; i< values.length; i++){
+            res += values[i];
+            res += '\n';
+        }
+        return res;
     }
 }

@@ -32,10 +32,10 @@ public class Algorithm {
         Individual newSol = new Individual();
         for(int i=0; i<indiv1.size(); i++){
             if(Math.random()<=uniformRate){
-                newSol.setValue(indiv1.getValue());
+                newSol.setValues(indiv1.getValues(i), i);
             }
             else{
-                newSol.setValue(indiv2.getValue());
+                newSol.setValues(indiv2.getValues(i), i);
             }
         }
         return newSol;
@@ -47,16 +47,16 @@ public class Algorithm {
                 int operationType = (int)Math.random();
                 switch(operationType){
                     default :
-                        indiv.setValue((float) (indiv.getValue()+Math.random()));
+                        indiv.setValues((float) (indiv.getValues(i)+Math.random()), i);
                         break;
                     case 1 :
-                        indiv.setValue((float) (indiv.getValue()-Math.random()));
+                        indiv.setValues((float) (indiv.getValues(i)-Math.random()), i);
                         break;
                     case 2 :
-                        indiv.setValue((float) (indiv.getValue()*Math.random()));
+                        indiv.setValues((float) (indiv.getValues(i)*Math.random()), i);
                         break;
                     case 3 :
-                        indiv.setValue((float) (indiv.getValue()/Math.random()));
+                        indiv.setValues((float) (indiv.getValues(i)/Math.random()), i);
                         break;
                 }
             }

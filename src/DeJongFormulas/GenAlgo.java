@@ -1,9 +1,11 @@
 package DeJongFormulas;
 
+import java.util.Scanner;
+
 /**
  * Created by Benoit on 18/04/2014.
  */
-public class GenAlgo {
+public class GenAlgo{
 
     public static void main(String[] args){
 
@@ -11,17 +13,18 @@ public class GenAlgo {
         FitnessCalc.setSolution(0);
 
         //Generate G0 (First population)
-        Population myPop = new Population(20);
+        Population myPop = new Population(5);
 
         //Evolve our population 'til we get to our optimum
-        int generationCounter = 0;
+        int generationCounter = 1;
         while(myPop.getFittest().getFitness() < FitnessCalc.getMaxFitness()){
             generationCounter++;
             System.out.println("Generation: "+generationCounter+" Fittest : "+ myPop.getFittest().getFitness());
             myPop = Algorithm.evolvePopulation(myPop);
         }
         System.out.println("Solution found !");
-        System.out.println("Generation : " + generationCounter);
+        System.out.println("Generation number : " + generationCounter);
         System.out.println(myPop.getFittest());
+        //System.out.println(myPop);
     }
 }

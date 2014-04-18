@@ -10,15 +10,17 @@ public class FitnessCalc {
         idealSolution = newSolution;
     }
 
-    public float getFitness(Individual indivToEval){
-        int fitness = 0;
+    public static double getFitness(Individual indivToEval){
+        indivToEval.fitness = 0;
         //H(x)
-        return fitness;
+
+        return indivToEval.fitness;
     }
 
-    public static float getMaxFitness(){
+    public static double getMaxFitness(){
         int bestFitness = 0;
         //Comparison
+
         return bestFitness;
     }
 }

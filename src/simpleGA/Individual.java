@@ -35,7 +35,7 @@ public class Individual {
         return genes.length;
     }
 
-    public float getFitness() {
+    public double getFitness() {
         if (fitness == 0) {
             fitness = FitnessCalc.getFitness(this);
         }

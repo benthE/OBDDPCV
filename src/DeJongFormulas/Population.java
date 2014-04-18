@@ -36,4 +36,14 @@ public class Population {
     public void saveIndividual(int index, Individual indivToSave){
         individuals[index] = indivToSave;
     }
+
+    @Override
+    public String toString(){
+        String res = "Population values : \n";
+        for(int i=0; i<size(); i++){
+            res += "Individual number ["+i+"]\n";
+            res += individuals[i];
+        }
+        return res;
+    }
 }
