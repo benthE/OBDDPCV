@@ -17,7 +17,7 @@ public class GenAlgo{
 
         //Evolve our population 'til we get to our optimum
         int generationCounter = 1;
-        while(myPop.getFittest().getFitness() < FitnessCalc.getMaxFitness()){
+        while(myPop.getFittest().getFitness() < FitnessCalc.getMaxFitness(myPop)){
             generationCounter++;
             System.out.println("Generation: "+generationCounter+" Fittest : "+ myPop.getFittest().getFitness());
             myPop = Algorithm.evolvePopulation(myPop);
@@ -25,6 +25,6 @@ public class GenAlgo{
         System.out.println("Solution found !");
         System.out.println("Generation number : " + generationCounter);
         System.out.println(myPop.getFittest());
-        //System.out.println(myPop);
+        System.out.println("Best Fitness : " + myPop.getFittest().getFitness());
     }
 }
