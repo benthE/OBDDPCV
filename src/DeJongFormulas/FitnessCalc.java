@@ -4,26 +4,19 @@ package DeJongFormulas;
  * Created by Benoit on 18/04/2014.
  */
 public class FitnessCalc {
-    private static float idealSolution;
+    protected static double idealSolution;
 
-    public static void setSolution(float newSolution){
+    public static void setSolution(double newSolution){
         idealSolution = newSolution;
     }
 
-    public static double getFitness(Individual indivToEval){
-        indivToEval.fitness = 0;
-        //H(x)
-        for(int i=0; i < indivToEval.size(); i++){
-            indivToEval.fitness += sum(indivToEval.size(), indivToEval.getValues(i));
-        }
-        return indivToEval.fitness;
-    }
-
-    public static double sum(int n, double X) {
+    public static double sum(int n, Individual X) {
         double res = 0;
-        double function = function(X);
-        for (int i = 0; i < n; i++) {
+        double function = function(X.getValues(0));
+        for (int i = 1; i < n; i++) {
             res += function;
+//            System.out.println("Loop number : " + i + " for function 2, function = " + function + " result : " + res);
+            function = function(X.getValues(i));
         }
         return res;
     }
@@ -32,6 +25,7 @@ public class FitnessCalc {
         double res = 0;
         for(int i=1; i<=3; i++){
             res += x*x;
+//            System.out.println("Loop number : " + i + " for function 1, x = " + x + " result : " + res);
         }
         return res;
     }

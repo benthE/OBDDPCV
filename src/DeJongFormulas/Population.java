@@ -6,17 +6,19 @@ package DeJongFormulas;
  */
 public class Population {
 
-    Individual[] individuals;
+    private static Individual[] individuals;
 
     public Population(int popSize) {
         individuals = new Individual[popSize];
         for (int i=0; i<size(); i++){
             Individual newIndividual = new Individual();
+            //TODO : Utility function
+            //newIndividual.setFitness(newIndividual.getFitness());
             saveIndividual(i, newIndividual);
         }
     }
 
-    public Individual getIndividual(int index){
+    public static Individual getIndividual(int index){
         return individuals[index];
     }
 

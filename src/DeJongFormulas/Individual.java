@@ -10,14 +10,14 @@ public class Individual extends simpleGA.Individual {
     private double values[];
     private double maxVal, minVal;
     protected double fitness;
+    protected int n = 4;
 
     //create a random guy
     public Individual() {
-        int n = 4;
         values = new double[n];
         setMaxVal(5.12);
         setMinVal(-5.12);
-        for(int i=0; i<=(n-1); i++) {
+        for(int i=0; i<n; i++) {
             Random r = new Random();
             values[i] = minVal + (maxVal - minVal) * r.nextDouble();
         }
@@ -45,6 +45,19 @@ public class Individual extends simpleGA.Individual {
 
     public void setMinVal(double minVal) {
         this.minVal = minVal;
+    }
+
+    public double getFitness() {
+        fitness = 0;
+        for(int i=0; i < n; i++){
+            fitness += FitnessCalc.sum(n, Population.getIndividual(i));
+//            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
+        }
+        return fitness;
+    }
+
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
     }
 
     @Override

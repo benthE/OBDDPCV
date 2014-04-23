@@ -30,7 +30,7 @@ public class Algorithm {
 
     private static Individual crossover(Individual indiv1, Individual indiv2){
         Individual newSol = new Individual();
-        for(int i=0; i<indiv1.size(); i++){
+        for(int i=0; i<indiv1.n; i++){
             if(Math.random()<=uniformRate){
                 newSol.setValues(indiv1.getValues(i), i);
             }
