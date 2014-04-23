@@ -16,10 +16,11 @@ public class GenAlgo{
         Population myPop = new Population(5);
 
         //Evolve our population 'til we get to our optimum
-        int generationCounter = 1;
+        int generationCounter = 0;
+        System.out.println("Generation Number, Best Fitness, Average Fitness, Deviance");
         while(myPop.getFittest().getFitness() < FitnessCalc.idealSolution){
             generationCounter++;
-            System.out.println("Generation: "+generationCounter+" Fittest : "+ myPop.getFittest().getFitness());
+            System.out.println(generationCounter +" , "+ myPop.getFittest().getFitness()+" , "+myPop.getAvgFitness()+" , "+myPop.getDeviance());
             myPop = Algorithm.evolvePopulation(myPop);
         }
         System.out.println("Solution found !");

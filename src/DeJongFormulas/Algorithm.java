@@ -8,6 +8,7 @@ public class Algorithm {
     private static double uniformRate = 0.5;
     private static double mutationRate = 0.05;
     private static int tournamentSize = 5;
+    protected static boolean minORmax;
 
     public static Population evolvePopulation(Population pop){
         Population newPopulation = new Population(pop.size());

@@ -31,6 +31,25 @@ public class Population {
         return fittest;
     }
 
+    public double getAvgFitness(){
+        int i = 1;
+        double totalFitness = 0;
+        while(i!=size()){
+            totalFitness+=getIndividual(i).getFitness();
+            i++;
+        }
+        return (totalFitness/i);
+    }
+
+    public double getDeviance(){
+        double mean = getAvgFitness();
+        double res1 = 0;
+        for(int i=0; i<size();i++){
+            res1 += ((getIndividual(i).getFitness() - mean) * (getIndividual(i).getFitness() - mean));
+        }
+        return (Math.sqrt(res1));
+    }
+
     public int size(){
         return individuals.length;
     }
