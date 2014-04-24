@@ -10,53 +10,60 @@ public class Algorithm {
     private static double uniformRate = 0.5;
     private static double mutationRate = 0.05;
     private static int tournamentSize = 5;
-    protected static boolean minORmax;
+    private static boolean maximization = true;
 
-    public static Population evolvePopulation(Population pop){
+    public static Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size());
 
         int i = 0;
-        while(i!=pop.size()){
+        while (i != pop.size()) {
             Individual indiv1 = tournamentSelection(pop);
             Individual indiv2 = tournamentSelection(pop);
             Individual newIndiv = crossover(indiv1, indiv2);
+            mutate(newIndiv);
             newPopulation.saveIndividual(i, newIndiv);
             i++;
-            //mutate(newPopulation.getIndividual(i));
         }
 
         return newPopulation;
     }
 
-    private static Individual crossover(Individual indiv1, Individual indiv2){
+    private static Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual();
-        for(int i=0; i<indiv1.n; i++){
-            if(Math.random()<=uniformRate){
+        for (int i = 0; i < indiv1.n; i++) {
+            if (Math.random() <= uniformRate) {
                 newSol.setValues(indiv1.getValues(i), i);
-            }
-            else{
+            } else {
                 newSol.setValues(indiv2.getValues(i), i);
             }
         }
         return newSol;
     }
 
-    private static void mutate(Individual indiv){
-        for(int i=0; i<indiv.size(); i++){
-            if(Math.random()<=mutationRate){
+    private static void mutate(Individual indiv) {
+        for (int i = 0; i < indiv.n; i++) {
+            if (Math.random() <= mutationRate) {
                 Random randomno = new Random();
-                indiv.setValues(indiv.getValues(i)*(1+ randomno.nextGaussian()), i);
+                indiv.setValues(indiv.getValues(i) * (1 + randomno.nextGaussian()), i);
             }
         }
     }
 
-    private static Individual tournamentSelection(Population pop){
+    private static Individual tournamentSelection(Population pop) {
         Population tournament = new Population(tournamentSize);
-        for(int i=0; i<tournamentSize; i++){
-            int randomId = (int) (Math.random()*pop.size());
+        for (int i = 0; i < tournamentSize; i++) {
+            int randomId = (int) (Math.random() * pop.size());
             tournament.saveIndividual(i, pop.getIndividual(randomId));
         }
         Individual fittest = tournament.getFittest();
         return fittest;
+    }
+
+    public static boolean isMaximization() {
+        return maximization;
+    }
+
+    public static void setMaximization(boolean maximization) {
+        Algorithm.maximization = maximization;
     }
 }

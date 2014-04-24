@@ -6,7 +6,7 @@ package DeJongFormulas;
 public class FitnessCalc {
     protected static double idealSolution;
 
-    public static void setSolution(double newSolution){
+    public static void setSolution(double newSolution) {
         idealSolution = newSolution;
     }
 
@@ -21,22 +21,29 @@ public class FitnessCalc {
         return res;
     }
 
-    public static double function(double x){
+    public static double function(double x) {
         double res = 0;
-        for(int i=1; i<=3; i++){
-            res += x*x;
+        for (int i = 1; i <= 3; i++) {
+            res += x * x;
 //            System.out.println("Loop number : " + i + " for function 1, x = " + x + " result : " + res);
         }
         return res;
     }
 
-    public static double getMaxFitness(Population myPop){
+    public static double getMaxFitness(Population myPop) {
         int i = 0;
         double maxFitness = myPop.getIndividual(i).getFitness();
         //Comparison
-        for(i = 1; i < myPop.size(); i++){
-            if (myPop.getIndividual(i).getFitness() > myPop.getIndividual(i-1).getFitness()){
-                maxFitness = myPop.getIndividual(i).getFitness();
+        for (i = 1; i < myPop.size(); i++) {
+            if(Algorithm.isMaximization()) {
+                if (myPop.getIndividual(i).getFitness() > myPop.getIndividual(i - 1).getFitness()) {
+                    maxFitness = myPop.getIndividual(i).getFitness();
+                }
+            }
+            else{
+                if (myPop.getIndividual(i).getFitness() < myPop.getIndividual(i - 1).getFitness()) {
+                    maxFitness = myPop.getIndividual(i).getFitness();
+                }
             }
         }
         return maxFitness;
