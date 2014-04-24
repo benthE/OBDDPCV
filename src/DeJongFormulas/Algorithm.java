@@ -1,5 +1,7 @@
 package DeJongFormulas;
 
+import java.util.Random;
+
 /**
  * Created by Benoit on 18/04/2014.
  */
@@ -20,10 +22,7 @@ public class Algorithm {
             Individual newIndiv = crossover(indiv1, indiv2);
             newPopulation.saveIndividual(i, newIndiv);
             i++;
-        }
-
-        while(i!=newPopulation.size()){
-            mutate(newPopulation.getIndividual(i));
+            //mutate(newPopulation.getIndividual(i));
         }
 
         return newPopulation;
@@ -45,21 +44,8 @@ public class Algorithm {
     private static void mutate(Individual indiv){
         for(int i=0; i<indiv.size(); i++){
             if(Math.random()<=mutationRate){
-                int operationType = (int)Math.random();
-                switch(operationType){
-                    default :
-                        indiv.setValues((float) (indiv.getValues(i)+Math.random()), i);
-                        break;
-                    case 1 :
-                        indiv.setValues((float) (indiv.getValues(i)-Math.random()), i);
-                        break;
-                    case 2 :
-                        indiv.setValues((float) (indiv.getValues(i)*Math.random()), i);
-                        break;
-                    case 3 :
-                        indiv.setValues((float) (indiv.getValues(i)/Math.random()), i);
-                        break;
-                }
+                Random randomno = new Random();
+                indiv.setValues(indiv.getValues(i)*(1+ randomno.nextGaussian()), i);
             }
         }
     }
