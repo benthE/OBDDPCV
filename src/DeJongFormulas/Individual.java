@@ -49,7 +49,7 @@ public class Individual extends simpleGA.Individual {
     public double getFitness() {
         fitness = 0;
         for (int i = 0; i < n; i++) {
-            fitness += FitnessCalc.sum(n, Population.getIndividual(i));
+            fitness += FitnessCalc.sum(n, this);
 //            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
         }
         return fitness;

@@ -5,7 +5,7 @@ package DeJongFormulas;
  */
 public class Population {
 
-    private static Individual[] individuals;
+    private Individual[] individuals;
 
     public Population(int popSize) {
         individuals = new Individual[popSize];
@@ -15,7 +15,7 @@ public class Population {
         }
     }
 
-    public static Individual getIndividual(int index) {
+    public Individual getIndividual(int index) {
         return individuals[index];
     }
 
