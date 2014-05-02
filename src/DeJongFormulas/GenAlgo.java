@@ -3,6 +3,7 @@ package DeJongFormulas;
 import java.io.*;
 import java.util.Scanner;
 
+
 /**
  * Created by Benoit on 18/04/2014.
  */
@@ -11,11 +12,11 @@ public class GenAlgo {
     public static void main(String[] args) {
         try {
             int popSize, nbValues, optiChoice;
-            double sol;
+            double sol, approx;
 
             Scanner s = new Scanner(System.in);
 
-            System.out.println("What is your optimization problem ? 1 : Maximization / 2 : Minimization ");
+            System.out.println("What is your optimization problem ? 1 : Maximization / 2 : Minimization");
             optiChoice = s.nextInt();
             if(optiChoice == 1){
                 Algorithm.setMaximization(true);
@@ -30,13 +31,17 @@ public class GenAlgo {
             FitnessCalc.setSolution(sol);
 
             //Generate G0 (First population)
-            System.out.println("Enter your population number of values : ");
+            System.out.println("Enter your chromosome size : ");
             nbValues = s.nextInt();
-            Individual.setN(nbValues);
+            Individual.setChromSize(nbValues);
 
             System.out.println("Enter your population size : ");
             popSize = s.nextInt();
             Population myPop = new Population(popSize);
+
+            System.out.println("Enter your approximation : ");
+            approx = s.nextDouble();
+            Algorithm.setApproximation(approx);
 
             //Evolve our population 'til we get to our optimum
             int generationCounter = 0;
@@ -60,12 +65,16 @@ public class GenAlgo {
                     out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
                 }
             }
+            while(!Algorithm.isClosest()){
+
+            }
             System.out.println("Solution found !");
             System.out.println("Generation number : " + generationCounter);
             System.out.println(myPop.getFittest());
             System.out.println("Best Fitness : " + myPop.getFittest().getFitness());
             out.close();
             writer.close();
+            CSVGen.CSVGenerator.main(null);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

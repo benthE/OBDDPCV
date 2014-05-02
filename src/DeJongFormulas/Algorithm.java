@@ -11,6 +11,24 @@ public class Algorithm {
     private static double mutationRate = 0.05;
     private static int tournamentSize = 5;
     private static boolean maximization = true;
+    private static double approximation = 0;
+
+    public static double getApproximation() {
+        return approximation;
+    }
+
+    public static void setApproximation(double approximation) {
+        Algorithm.approximation = approximation;
+    }
+
+    public static boolean isClosest(){
+        if(FitnessCalc.getIdealSolution()<getApproximation()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public static Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size());
@@ -30,7 +48,7 @@ public class Algorithm {
 
     private static Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual();
-        for (int i = 0; i < indiv1.n; i++) {
+        for (int i = 0; i < indiv1.getChromSize(); i++) {
             if (Math.random() <= uniformRate) {
                 newSol.setValues(indiv1.getValues(i), i);
             } else {
@@ -41,7 +59,7 @@ public class Algorithm {
     }
 
     private static void mutate(Individual indiv) {
-        for (int i = 0; i < indiv.n; i++) {
+        for (int i = 0; i < indiv.getChromSize(); i++) {
             if (Math.random() <= mutationRate) {
                 Random randomno = new Random();
                 indiv.setValues(indiv.getValues(i) * (1 + randomno.nextGaussian()), i);
@@ -66,4 +84,5 @@ public class Algorithm {
     public static void setMaximization(boolean maximization) {
         Algorithm.maximization = maximization;
     }
+
 }

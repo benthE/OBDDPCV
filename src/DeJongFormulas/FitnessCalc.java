@@ -10,6 +10,10 @@ public class FitnessCalc {
         idealSolution = newSolution;
     }
 
+    public static double getIdealSolution() {
+        return idealSolution;
+    }
+
     public static double sum(int n, Individual X) {
         double res = 0;
         double function = function(X.getValues(0));

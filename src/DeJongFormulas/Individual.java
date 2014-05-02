@@ -5,18 +5,18 @@ import java.util.Random;
 /**
  * Created by Benoit on 18/04/2014.
  */
-public class Individual extends simpleGA.Individual {
+public class Individual {
     protected double fitness;
-    protected static int n = 4;
+    protected static int chromSize = 4;
     private double values[];
     private double maxVal, minVal;
 
     //create a random guy
     public Individual() {
-        values = new double[n];
+        values = new double[chromSize];
         setMaxVal(5.12);
         setMinVal(-5.12);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < chromSize; i++) {
             Random r = new Random();
             values[i] = minVal + (maxVal - minVal) * r.nextDouble();
         }
@@ -48,8 +48,8 @@ public class Individual extends simpleGA.Individual {
 
     public double getFitness() {
         fitness = 0;
-        for (int i = 0; i < n; i++) {
-            fitness += FitnessCalc.sum(n, this);
+        for (int i = 0; i < chromSize; i++) {
+            fitness += FitnessCalc.sum(chromSize, this);
 //            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
         }
         return fitness;
@@ -59,12 +59,12 @@ public class Individual extends simpleGA.Individual {
         this.fitness = fitness;
     }
 
-    public int getN() {
-        return n;
+    public int getChromSize() {
+        return chromSize;
     }
 
-    public static void setN(int n) {
-        Individual.n = n;
+    public static void setChromSize(int n) {
+        Individual.chromSize = n;
     }
 
     @Override
