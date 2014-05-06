@@ -11,8 +11,22 @@ public class Algorithm {
     private static double mutationRate = 0.05;
     private static int tournamentSize = 5;
     private static boolean maximization = true;
+    /*
+    TODO : Standard optimization method
     private static double approximation = 0;
+    */
+    protected static double idealSolution;
 
+    public static void setSolution(double newSolution) {
+        idealSolution = newSolution;
+    }
+
+    public static double getIdealSolution() {
+        return idealSolution;
+    }
+
+    /*
+    TODO : Standard optimization method
     public static double getApproximation() {
         return approximation;
     }
@@ -22,13 +36,14 @@ public class Algorithm {
     }
 
     public static boolean isClosest(){
-        if(FitnessCalc.getIdealSolution()<getApproximation()){
+        if(getIdealSolution()<getApproximation()){
             return true;
         }
         else{
             return false;
         }
     }
+    */
 
     public static Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size());
@@ -85,4 +100,22 @@ public class Algorithm {
         Algorithm.maximization = maximization;
     }
 
+    public double getMaxFitness(Population myPop) {
+        int i = 0;
+        double maxFitness = myPop.getIndividual(i).getFitness();
+        //Comparison
+        for (i = 1; i < myPop.size(); i++) {
+            if(Algorithm.isMaximization()) {
+                if (myPop.getIndividual(i).getFitness() > myPop.getIndividual(i - 1).getFitness()) {
+                    maxFitness = myPop.getIndividual(i).getFitness();
+                }
+            }
+            else{
+                if (myPop.getIndividual(i).getFitness() < myPop.getIndividual(i - 1).getFitness()) {
+                    maxFitness = myPop.getIndividual(i).getFitness();
+                }
+            }
+        }
+        return maxFitness;
+    }
 }

@@ -49,7 +49,7 @@ public class Individual {
     public double getFitness() {
         fitness = 0;
         for (int i = 0; i < chromSize; i++) {
-            fitness += FitnessCalc.sum(chromSize, this);
+            fitness += FitnessCalc.utilityFunction(chromSize, this);
 //            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
         }
         return fitness;

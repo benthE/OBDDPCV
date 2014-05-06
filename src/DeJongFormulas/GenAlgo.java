@@ -10,9 +10,12 @@ import java.util.Scanner;
 public class GenAlgo {
 
     public static void main(String[] args) {
+        /*TODO : REFACTOOOOOOR*/
         try {
             int popSize, nbValues, optiChoice;
             double sol, approx;
+
+            /*Beginning parameters input*/
 
             Scanner s = new Scanner(System.in);
 
@@ -28,7 +31,7 @@ public class GenAlgo {
             //Set a ideal solution
             System.out.println("Enter your ideal solution : ");
             sol = s.nextDouble();
-            FitnessCalc.setSolution(sol);
+            Algorithm.setSolution(sol);
 
             //Generate G0 (First population)
             System.out.println("Enter your chromosome size : ");
@@ -39,9 +42,14 @@ public class GenAlgo {
             popSize = s.nextInt();
             Population myPop = new Population(popSize);
 
+            /*
+            TODO : Standard optimization method
             System.out.println("Enter your approximation : ");
             approx = s.nextDouble();
             Algorithm.setApproximation(approx);
+            */
+
+            /*Ending parameters input*/
 
             //Evolve our population 'til we get to our optimum
             int generationCounter = 0;
@@ -50,7 +58,7 @@ public class GenAlgo {
             System.out.println("Generation Number, Best Fitness, Average Fitness, Deviance");
             out.println("Generation Number, Best Fitness, Average Fitness, Fitness Deviance");
             if(Algorithm.isMaximization()) {
-                while (myPop.getFittest().getFitness() < FitnessCalc.idealSolution) {
+                while (myPop.getFittest().getFitness() < Algorithm.getIdealSolution()) {
                     generationCounter++;
                     System.out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
                     myPop = Algorithm.evolvePopulation(myPop);
@@ -58,16 +66,18 @@ public class GenAlgo {
                 }
             }
             else{
-                while (myPop.getFittest().getFitness() > FitnessCalc.idealSolution) {
+                while (myPop.getFittest().getFitness() > Algorithm.getIdealSolution()) {
                     generationCounter++;
                     System.out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
                     myPop = Algorithm.evolvePopulation(myPop);
                     out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
                 }
             }
+            /*
+            TODO : Implement standard optimization method (report to Algorithm)
             while(!Algorithm.isClosest()){
 
-            }
+            }*/
             System.out.println("Solution found !");
             System.out.println("Generation number : " + generationCounter);
             System.out.println(myPop.getFittest());
