@@ -1,7 +1,7 @@
 package DeJongFormulas;
 
 /**
- * Created by Vincent on 06/05/2014.
+ * Created by Benoit on 06/05/2014.
  */
 public class FourthFunc implements FitnessCalc1 {
     @Override

@@ -1,7 +1,7 @@
 package DeJongFormulas;
 
 /**
- * Created by Vincent on 02/05/2014.
+ * Created by Benoit on 02/05/2014.
  */
 public class FirstFunc implements FitnessCalc1{
 

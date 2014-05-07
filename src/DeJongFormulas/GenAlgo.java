@@ -14,6 +14,7 @@ public class GenAlgo {
         try {
             int popSize, nbValues, optiChoice;
             double sol, approx;
+            FitnessCalc1 FitnessFunc;
 
             /*Beginning parameters input*/
 
