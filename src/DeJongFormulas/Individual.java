@@ -46,10 +46,10 @@ public class Individual {
         this.minVal = minVal;
     }
 
-    public double getFitness() {
+    public double getFitness(FitnessCalc1 F) {
         fitness = 0;
         for (int i = 0; i < chromSize; i++) {
-            fitness += FitnessCalc.utilityFunction(chromSize, this);
+            fitness += F.utilityFunction(this);
 //            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
         }
         return fitness;

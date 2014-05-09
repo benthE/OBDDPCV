@@ -12,7 +12,7 @@ public class GenAlgo {
     public static void main(String[] args) {
         /*TODO : REFACTOOOOOOR*/
         try {
-            int popSize, nbValues, optiChoice;
+            int popSize, nbValues, optiChoice, funcChoice;
             double sol, approx;
             FitnessCalc1 FitnessFunc;
 
@@ -52,6 +52,27 @@ public class GenAlgo {
 
             /*Ending parameters input*/
 
+            //Function choice (switch case)
+            System.out.println("Which De Jong's Function would you like to optimize ? (default = First Function)");
+            funcChoice = s.nextInt();
+            switch (funcChoice){
+                default :
+                    FitnessFunc = new FirstFunc();
+                    break;
+                case 2 :
+                    FitnessFunc = new SecondFunc();
+                    break;
+                case 3 :
+                    FitnessFunc = new ThirdFunc();
+                    break;
+                case 4 :
+                    FitnessFunc = new FourthFunc();
+                    break;
+                case 5 :
+                    FitnessFunc = new FifthFunc();
+                    break;
+            }
+
             //Evolve our population 'til we get to our optimum
             int generationCounter = 0;
             PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
@@ -59,19 +80,19 @@ public class GenAlgo {
             System.out.println("Generation Number, Best Fitness, Average Fitness, Deviance");
             out.println("Generation Number, Best Fitness, Average Fitness, Fitness Deviance");
             if(Algorithm.isMaximization()) {
-                while (myPop.getFittest().getFitness() < Algorithm.getIdealSolution()) {
+                while (myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) < Algorithm.getIdealSolution()) {
                     generationCounter++;
-                    System.out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
-                    myPop = Algorithm.evolvePopulation(myPop);
-                    out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
+                    System.out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
+                    myPop = Algorithm.evolvePopulation(myPop, FitnessFunc);
+                    out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
                 }
             }
             else{
-                while (myPop.getFittest().getFitness() > Algorithm.getIdealSolution()) {
+                while (myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) > Algorithm.getIdealSolution()) {
                     generationCounter++;
-                    System.out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
-                    myPop = Algorithm.evolvePopulation(myPop);
-                    out.println(generationCounter + " , " + myPop.getFittest().getFitness() + " , " + myPop.getAvgFitness() + " , " + myPop.getDeviance());
+                    System.out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
+                    myPop = Algorithm.evolvePopulation(myPop, FitnessFunc);
+                    out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
                 }
             }
             /*
@@ -81,8 +102,8 @@ public class GenAlgo {
             }*/
             System.out.println("Solution found !");
             System.out.println("Generation number : " + generationCounter);
-            System.out.println(myPop.getFittest());
-            System.out.println("Best Fitness : " + myPop.getFittest().getFitness());
+            System.out.println(myPop.getFittest(FitnessFunc));
+            System.out.println("Best Fitness : " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc));
             out.close();
             writer.close();
             CSVGen.CSVGenerator.main(null);

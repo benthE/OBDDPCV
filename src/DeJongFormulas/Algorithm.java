@@ -45,13 +45,13 @@ public class Algorithm {
     }
     */
 
-    public static Population evolvePopulation(Population pop) {
+    public static Population evolvePopulation(Population pop, FitnessCalc1 F) {
         Population newPopulation = new Population(pop.size());
 
         int i = 0;
         while (i != pop.size()) {
-            Individual indiv1 = tournamentSelection(pop);
-            Individual indiv2 = tournamentSelection(pop);
+            Individual indiv1 = tournamentSelection(pop, F);
+            Individual indiv2 = tournamentSelection(pop, F);
             Individual newIndiv = crossover(indiv1, indiv2);
             mutate(newIndiv);
             newPopulation.saveIndividual(i, newIndiv);
@@ -82,13 +82,13 @@ public class Algorithm {
         }
     }
 
-    private static Individual tournamentSelection(Population pop) {
+    private static Individual tournamentSelection(Population pop, FitnessCalc1 F) {
         Population tournament = new Population(tournamentSize);
         for (int i = 0; i < tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.saveIndividual(i, pop.getIndividual(randomId));
         }
-        Individual fittest = tournament.getFittest();
+        Individual fittest = tournament.getFittest(F);
         return fittest;
     }
 
@@ -100,19 +100,19 @@ public class Algorithm {
         Algorithm.maximization = maximization;
     }
 
-    public double getMaxFitness(Population myPop) {
+    public double getMaxFitness(Population myPop, FitnessCalc1 F) {
         int i = 0;
-        double maxFitness = myPop.getIndividual(i).getFitness();
+        double maxFitness = myPop.getIndividual(i).getFitness(F);
         //Comparison
         for (i = 1; i < myPop.size(); i++) {
             if(Algorithm.isMaximization()) {
-                if (myPop.getIndividual(i).getFitness() > myPop.getIndividual(i - 1).getFitness()) {
-                    maxFitness = myPop.getIndividual(i).getFitness();
+                if (myPop.getIndividual(i).getFitness(F) > myPop.getIndividual(i - 1).getFitness(F)) {
+                    maxFitness = myPop.getIndividual(i).getFitness(F);
                 }
             }
             else{
-                if (myPop.getIndividual(i).getFitness() < myPop.getIndividual(i - 1).getFitness()) {
-                    maxFitness = myPop.getIndividual(i).getFitness();
+                if (myPop.getIndividual(i).getFitness(F) < myPop.getIndividual(i - 1).getFitness(F)) {
+                    maxFitness = myPop.getIndividual(i).getFitness(F);
                 }
             }
         }
