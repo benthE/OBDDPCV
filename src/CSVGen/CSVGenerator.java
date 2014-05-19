@@ -1,13 +1,15 @@
 package CSVGen;
 
+import GeneticAlg.GenAlgo;
+
 import java.io.*;
 
 public class CSVGenerator {
-    private static String file_name = "results.csv";
+    private static String file_name = GenAlgo.filename.substring(0,29)+".csv";
 
     public static void main(String args[]) {
         try {
-            FileInputStream ifstream = new FileInputStream("results.txt");
+            FileInputStream ifstream = new FileInputStream(GenAlgo.filename);
 
             FileWriter ofstream = new FileWriter(file_name);
             BufferedWriter out = new BufferedWriter(ofstream);
