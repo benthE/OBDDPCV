@@ -22,10 +22,44 @@ public class GenAlgo {
             int popSize, nbValues, optiChoice, funcChoice;
             double sol, approx;
             FitnessCalc1 FitnessFunc;
+            String testfile = "C:\\Users\\Vincent\\Documents\\GitHub\\Exercises\\testFiles\\A";
 
             /*Beginning parameters input*/
 
             Scanner s = new Scanner(System.in);
+
+            /*
+            TODO : this
+            RealLabelledData test = RealLabelledDataFactory.dataFromTextFile(testfile, -1, null);
+            RealLabelledData test_c[] = RealLabelledDataFactory.partitionLabels(test);
+
+            for(int c1 = 1; c1 < 11; c1++){
+                for(int c2 = c1+1; c2 < 11; c2++){
+                    System.out.println("Running Clusters " + c1 + " and " + c2 + ":\n");
+
+                    RealLabelledData test_data = new RealLabelledData();
+                    test_data.merge(test_c[c1]);
+                    if(c2 < 10){
+                        test_data.merge(test_c[c2]);
+                    }
+
+                    //TODO : Find a way to put the right repetition number
+                    //TODO : Figure out how to do PROJECTION
+                    int repeats = 10;
+
+                    int[] totalhits = new int[test_data.size()];
+                    double[] fitness1 = new double[repeats];
+                    double meanfitness1 = 0;
+                    double[] fitness2 = new double[repeats];
+                    double meanfitness2 = 0;
+                    double[] hits = new double[repeats];
+                    double meanhits = 0;
+
+                    String[] proj1 = new String[repeats];
+                    String[] proj2 = new String[repeats];
+
+                }
+            }*/
 
             System.out.println("What is your optimization problem ? 1 : Maximization / 2 : Minimization");
             optiChoice = s.nextInt();

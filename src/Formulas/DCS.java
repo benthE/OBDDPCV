@@ -10,6 +10,19 @@ import Toolbox.Maths;
  */
 
 public class DCS implements FitnessCalc1{
+    @Override
+    public double utilityFunction(Individual X) {
+        double res = 0;
+        for(int i = 0; i<X.getChromSize();i++){
+
+        }
+        return res;
+    }
+
+    @Override
+    public double function(double x, Individual X) {
+        return 0;
+    }
 
     /**
      * Calculates the Dcs divergence for a number of values. This is the uni-dimensional Dcs.
@@ -261,13 +274,5 @@ public class DCS implements FitnessCalc1{
     }
 
 
-    @Override
-    public double utilityFunction(Individual X) {
-        return 0;
-    }
 
-    @Override
-    public double function(double x, Individual X) {
-        return 0;
-    }
 }
