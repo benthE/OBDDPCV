@@ -1,11 +1,12 @@
 package CSVGen;
 
+import GeneticAlg.DCSTest;
 import GeneticAlg.GenAlgo;
 
 import java.io.*;
 
 public class CSVGenerator {
-    private static String file_name = GenAlgo.filename.substring(0,29)+".csv";
+    private static String file_name = DCSTest.filename.substring(0,23)+".csv";
 
     public static void main(String args[]) {
         try {

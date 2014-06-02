@@ -11,13 +11,7 @@ import Toolbox.Maths;
 
 public class DCS implements FitnessCalc1{
     @Override
-    public double utilityFunction(Individual X) {
-        double res = 0;
-        for(int i = 0; i<X.getChromSize();i++){
-
-        }
-        return res;
-    }
+    public double utilityFunction(Individual X) {return 0;}
 
     @Override
     public double function(double x, Individual X) {
@@ -51,6 +45,7 @@ public class DCS implements FitnessCalc1{
             System.err.println("Dcs Error: Data array and label array are of different sizes!");
             return -1;
         }
+
 		/* We assume that label > 0. If label is zero, print an error message */
         // TODO: write exception handling for this error message
 

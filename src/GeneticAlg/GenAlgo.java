@@ -1,5 +1,7 @@
 package GeneticAlg;
 
+import Data.RealLabelledData;
+import Data.RealLabelledDataFactory;
 import Formulas.*;
 
 import java.io.*;
@@ -17,7 +19,6 @@ public class GenAlgo {
     public static String filename;
 
     public static void main(String[] args) {
-        /*TODO : REFACTOOOOOOR*/
         try {
             int popSize, nbValues, optiChoice, funcChoice;
             double sol, approx;
@@ -28,8 +29,6 @@ public class GenAlgo {
 
             Scanner s = new Scanner(System.in);
 
-            /*
-            TODO : this
             RealLabelledData test = RealLabelledDataFactory.dataFromTextFile(testfile, -1, null);
             RealLabelledData test_c[] = RealLabelledDataFactory.partitionLabels(test);
 
@@ -39,27 +38,11 @@ public class GenAlgo {
 
                     RealLabelledData test_data = new RealLabelledData();
                     test_data.merge(test_c[c1]);
-                    if(c2 < 10){
+                    if(c2 < 10) {
                         test_data.merge(test_c[c2]);
                     }
-
-                    //TODO : Find a way to put the right repetition number
-                    //TODO : Figure out how to do PROJECTION
-                    int repeats = 10;
-
-                    int[] totalhits = new int[test_data.size()];
-                    double[] fitness1 = new double[repeats];
-                    double meanfitness1 = 0;
-                    double[] fitness2 = new double[repeats];
-                    double meanfitness2 = 0;
-                    double[] hits = new double[repeats];
-                    double meanhits = 0;
-
-                    String[] proj1 = new String[repeats];
-                    String[] proj2 = new String[repeats];
-
                 }
-            }*/
+            }
 
             System.out.println("What is your optimization problem ? 1 : Maximization / 2 : Minimization");
             optiChoice = s.nextInt();
@@ -114,6 +97,10 @@ public class GenAlgo {
                     break;
                 case 6 :
                     FitnessFunc = new DCS();
+                    Algorithm.setMaximization(false);
+                    Algorithm.setSolution(0);
+                    Individual.setChromSize(26);
+                    myPop = new Population(164);
                     break;
             }
 

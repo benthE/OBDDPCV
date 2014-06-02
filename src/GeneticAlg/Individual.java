@@ -2,8 +2,6 @@ package GeneticAlg;
 
 import Formulas.FitnessCalc1;
 
-import java.util.Random;
-
 /**
  * Created by Benoit on 18/04/2014.
  */
@@ -16,12 +14,12 @@ public class Individual {
     //create a random guy
     public Individual() {
         values = new double[chromSize];
-        setMaxVal(5.12);
+        /*setMaxVal(5.12);
         setMinVal(-5.12);
         for (int i = 0; i < chromSize; i++) {
             Random r = new Random();
             values[i] = minVal + (maxVal - minVal) * r.nextDouble();
-        }
+        }*/
     }
 
     public double getValues(int index) {
