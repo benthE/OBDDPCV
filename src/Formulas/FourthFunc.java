@@ -7,7 +7,7 @@ import GeneticAlg.Individual;
  */
 public class FourthFunc implements FitnessCalc1 {
     @Override
-    public double utilityFunction(Individual X) {
+    public double utilityFunction(double[] v, int[] l,Individual X) {
         double res =0;
         for(int i=1; i<X.getChromSize();i++){
             res += i*Math.pow(X.getValues(i),4);

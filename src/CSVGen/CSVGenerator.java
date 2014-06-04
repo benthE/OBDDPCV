@@ -1,7 +1,6 @@
 package CSVGen;
 
 import GeneticAlg.DCSTest;
-import GeneticAlg.GenAlgo;
 
 import java.io.*;
 
@@ -10,7 +9,7 @@ public class CSVGenerator {
 
     public static void main(String args[]) {
         try {
-            FileInputStream ifstream = new FileInputStream(GenAlgo.filename);
+            FileInputStream ifstream = new FileInputStream(DCSTest.filename);
 
             FileWriter ofstream = new FileWriter(file_name);
             BufferedWriter out = new BufferedWriter(ofstream);

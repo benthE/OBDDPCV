@@ -41,16 +41,20 @@ public class DCSTest {
             /*Fetching values into an individual*/
             RealLabelledData testingData = RealLabelledDataFactory.dataFromTextFile(testfile, -1, null);
             RealLabelledData testingDataLabels[] = RealLabelledDataFactory.partitionLabels(testingData);
-            ObservationReal[] individuals = new ObservationReal[164];
-            for(int i=0; i<individuals.length; i++){
-                individuals[i] = testingData.get(i);
+            ObservationReal[] patients = new ObservationReal[testingDataLabels[5].size()+testingDataLabels[4].size()];
+            int indexIndiv = 0;
+            for(int i=0; i<testingDataLabels[5].size(); i++){
+                patients[i] = testingDataLabels[5].get(i);
+            }
+            for(int i = testingDataLabels[5].size(); i<(testingDataLabels[5].size()+testingDataLabels[4].size()); i++){
+                patients[i] = testingDataLabels[4].get(i-testingDataLabels[5].size());
             }
 
             /*Putting my patient values into my original model ones*/
-            for(int j=0; j<individuals.length; j++) {
-                for (int i = 0; i < individuals[j].getAttributeSize(); i++) {
-                    myPop.getIndividual(1).setValues(individuals[i].getAttribute(i), i);
-                    myPop.getIndividual(2).setValues(individuals[i].getAttribute(i), i);
+            for(int j=0; j<patients.length; j++) {
+                for (int i = 0; i < patients[j].getAttributeSize(); i++) {
+                    myPop.getIndividual(1).setValues(patients[i].getAttribute(i), i);
+                    myPop.getIndividual(2).setValues(patients[i].getAttribute(i), i);
                 }
             }
 
@@ -63,36 +67,31 @@ public class DCSTest {
             out.println("#Generation Number, Best Fitness, Average Fitness, Fitness Deviance");
 
             while (generationCounter != 10) {
-                /*Projecting for 2 individuals*/
+                /*Projecting*/
                 LinProj P1 = new LinProj(26);
-                LinProj P2 = new LinProj(26);
-                for(int j=0; j<individuals.length;j++) {
-                    for (int i = 0; i < individuals[i].getAttributeSize(); i++) {
-                        P1.w[i] = myPop.getIndividual(1).getValues(i);
-                        P2.w[i] = myPop.getIndividual(2).getValues(i);
-                    }
+                for (int i = 0; i < myPop.getIndividual(1).getChromSize(); i++) {
+                    P1.w[i] = myPop.getIndividual(1).getValues(i);
                 }
-                P1.project(individuals[1].getAttributeValues());
-                P2.project(individuals[2].getAttributeValues());
 
-                /*Partitioning*/
-                RealLabelledDataFactory.twoPartition(testingData, 2, null);
+                int[] labeldata = new int[patients.length];
+                double[] projdata = new double[patients.length];
+                for(int i = 0; i<patients.length; i++){
+                    projdata[i] = P1.project(patients[i].getAttributeValues());
+                    labeldata[i] = patients[i].getLabel();
+                }
 
                 /*Evaluating*/
-                DCS.calculate(individuals[1].getAttributeValues(), testingData.getLabelList(), 2);
-                DCS.calculate(individuals[2].getAttributeValues(), testingData.getLabelList(), 2);
-                System.out.println("Genome values number = " + individuals[1].getAttributeValues().length);
-                System.out.println("Label 1 size = " + testingData.getLabelList().length);
+                //DCS.calculate(projdata, labeldata, 10);
 
+                /*Evaluating and Evolving*/
                 generationCounter++;
-                System.out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
-                myPop = Algorithm.evolvePopulation(myPop, FitnessFunc);
-                out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc).getFitness(FitnessFunc) + " , " + myPop.getAvgFitness(FitnessFunc) + " , " + myPop.getDeviance(FitnessFunc));
+                System.out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc, projdata, labeldata).getFitness(FitnessFunc, projdata, labeldata) + " , " + myPop.getAvgFitness(FitnessFunc, projdata, labeldata) + " , " + myPop.getDeviance(FitnessFunc, projdata, labeldata));
+                myPop = Algorithm.evolvePopulation(myPop, FitnessFunc, projdata, labeldata);
+                out.println(generationCounter + " , " + myPop.getFittest(FitnessFunc, projdata, labeldata).getFitness(FitnessFunc, projdata, labeldata) + " , " + myPop.getAvgFitness(FitnessFunc, projdata, labeldata) + " , " + myPop.getDeviance(FitnessFunc, projdata, labeldata));
             }
 
             System.out.println("Solution found !");
             System.out.println("Generation number : " + generationCounter);
-            System.out.println(myPop.getFittest(FitnessFunc));
 
             out.close();
             writer.close();

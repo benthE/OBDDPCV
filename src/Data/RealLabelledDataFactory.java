@@ -83,7 +83,7 @@ public class RealLabelledDataFactory {
             ret[i] = new RealLabelledData();
         }
 
-        for(ObservationReal aux: base)
+        for(final ObservationReal aux: base)
         {
             for (int i = 0; i < ret.length; i++)
             {

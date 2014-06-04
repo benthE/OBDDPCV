@@ -11,7 +11,11 @@ import Toolbox.Maths;
 
 public class DCS implements FitnessCalc1{
     @Override
-    public double utilityFunction(Individual X) {return 0;}
+    public double utilityFunction(double[] v, int []l, Individual X) {
+        double ret = 0;
+        ret = calculate(v, l, 10);
+        return ret;
+    }
 
     @Override
     public double function(double x, Individual X) {

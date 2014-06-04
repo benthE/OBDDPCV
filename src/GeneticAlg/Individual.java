@@ -26,6 +26,14 @@ public class Individual {
         return values[index];
     }
 
+    public double[] getAllValues(){
+        double[] ret = new double[this.getChromSize()];
+        for(int i = 0; i<this.getChromSize(); i++){
+            ret[i] = this.getValues(i);
+        }
+        return ret;
+    }
+
     public void setValues(double value, int index) {
         this.values[index] = value;
     }
@@ -46,11 +54,10 @@ public class Individual {
         this.minVal = minVal;
     }
 
-    public double getFitness(FitnessCalc1 F) {
+    public double getFitness(FitnessCalc1 F, double[] v, int[] l) {
         fitness = 0;
         for (int i = 0; i < chromSize; i++) {
-            fitness += F.utilityFunction(this);
-//            System.out.println("Loop number : " + i + " for utility function, individual number : " + i + ",  result : " + fitness);
+            fitness += F.utilityFunction(v, l, this);
         }
         return fitness;
     }

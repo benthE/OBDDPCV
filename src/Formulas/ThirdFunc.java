@@ -8,7 +8,7 @@ import GeneticAlg.Individual;
 public class ThirdFunc implements FitnessCalc1 {
 
     @Override
-    public double utilityFunction(Individual X) {
+    public double utilityFunction(double[] v, int[] l,Individual X) {
         double res = 0;
         double tmp = 0;
         for (int i = 1; i<X.getChromSize(); i++){

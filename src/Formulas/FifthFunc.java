@@ -9,7 +9,7 @@ public class FifthFunc implements FitnessCalc1 {
     private int[][] a;
 
     @Override
-    public double utilityFunction(Individual X) {
+    public double utilityFunction(double[] v, int[] l,Individual X) {
         double res = 0.002;
         double x1 = X.getValues(0);
         double x2 = X.getValues(1);

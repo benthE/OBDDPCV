@@ -21,36 +21,36 @@ public class Population {
         return individuals[index];
     }
 
-    public Individual getFittest(FitnessCalc1 F) {
+    public Individual getFittest(FitnessCalc1 F, double[] v, int[] l) {
         Individual fittest = individuals[0];
         for (int i = 0; i < size(); i++) {
             if(Algorithm.isMaximization()) {
-                if (fittest.getFitness(F) <= getIndividual(i).getFitness(F))
+                if (fittest.getFitness(F, v, l) <= getIndividual(i).getFitness(F, v, l))
                     fittest = getIndividual(i);
             }
             else {
-                if (fittest.getFitness(F) >= getIndividual(i).getFitness(F))
+                if (fittest.getFitness(F, v, l) >= getIndividual(i).getFitness(F, v, l))
                     fittest = getIndividual(i);
             }
         }
         return fittest;
     }
 
-    public double getAvgFitness(FitnessCalc1 F) {
+    public double getAvgFitness(FitnessCalc1 F, double[] v, int[] l) {
         int i = 1;
         double totalFitness = 0;
         while (i != size()) {
-            totalFitness += getIndividual(i).getFitness(F);
+            totalFitness += getIndividual(i).getFitness(F, v, l);
             i++;
         }
         return (totalFitness / i);
     }
 
-    public double getDeviance(FitnessCalc1 F) {
-        double mean = getAvgFitness(F);
+    public double getDeviance(FitnessCalc1 F, double[] v, int[] l) {
+        double mean = getAvgFitness(F, v, l);
         double res1 = 0;
         for (int i = 0; i < size(); i++) {
-            res1 += ((getIndividual(i).getFitness(F) - mean) * (getIndividual(i).getFitness(F) - mean))/(size()-1);
+            res1 += ((getIndividual(i).getFitness(F, v, l) - mean) * (getIndividual(i).getFitness(F, v, l) - mean))/(size()-1);
         }
         return (Math.sqrt(res1));
     }
