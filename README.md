@@ -23,10 +23,10 @@ Supervised by Claus Aranha.
 		- [X] 4
 		- [X] 5
 	- [ ] DCS
-		- [ ] Parameters input
+		- [X] Parameters input
 			- [X] Reading files
-			- [ ] Putting parameters into my original GA version
-		- [ ] Projection generation
-		- [ ] Projection partitioning
-		- [ ] Evaluation function working
+			- [X] Putting parameters into my original GA version
+		- [X] Projection generation
+		- [X] Projection partitioning
+		- [~] Evaluation function working
 - [ ] Make DCS bi-dimensional

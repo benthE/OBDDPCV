@@ -24,14 +24,8 @@ public class Population {
     public Individual getFittest(FitnessCalc1 F, double[] v, int[] l) {
         Individual fittest = individuals[0];
         for (int i = 0; i < size(); i++) {
-            if(Algorithm.isMaximization()) {
                 if (fittest.getFitness(F, v, l) <= getIndividual(i).getFitness(F, v, l))
                     fittest = getIndividual(i);
-            }
-            else {
-                if (fittest.getFitness(F, v, l) >= getIndividual(i).getFitness(F, v, l))
-                    fittest = getIndividual(i);
-            }
         }
         return fittest;
     }

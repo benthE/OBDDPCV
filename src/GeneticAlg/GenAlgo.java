@@ -12,8 +12,8 @@
 //
 //
 ///**
-// * Created by Benoit on 18/04/2014.
-// */
+//* Created by Benoit on 18/04/2014.
+//*/
 //public class GenAlgo {
 //
 //    public static String filename;

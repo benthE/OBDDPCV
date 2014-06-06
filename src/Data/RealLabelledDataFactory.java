@@ -83,7 +83,7 @@ public class RealLabelledDataFactory {
             ret[i] = new RealLabelledData();
         }
 
-        for(final ObservationReal aux: base)
+        for(ObservationReal aux: base)
         {
             for (int i = 0; i < ret.length; i++)
             {
@@ -206,7 +206,7 @@ public class RealLabelledDataFactory {
             while ((line = reader.readLine()) != null)
             {
                 ObservationReal dt; // Zeratul
-                int c;
+                int c = 0;
                 double[] dd;
 
                 String[] input = line.split(split);
